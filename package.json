@@ -1,0 +1,14 @@
+{
+  "name": "sekan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sekan-api-integration.js",
+  "scripts": {
+    "start": "node start"
+  },
+  "author": "Benjamin Banwart",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
