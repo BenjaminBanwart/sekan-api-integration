@@ -40,12 +40,6 @@ let callPromise = new Promise(function () {
         session_token = response.data.session_token;
         region = response.data.region;
 
-        console.log(aws4.sign({
-            secretAccessKey: secret_key,
-            accessKeyId: access_key_id,
-            sessionToken: session_token
-        }))
-
     })
     .catch(function (error) {
         console.log(error);
@@ -63,3 +57,10 @@ let callPromise = new Promise(function () {
         //'Authorization': 
 //    }
 //};
+
+
+console.log(aws4.sign({
+    secretAccessKey: secret_key,
+    accessKeyId: access_key_id,
+    sessionToken: session_token
+}))
