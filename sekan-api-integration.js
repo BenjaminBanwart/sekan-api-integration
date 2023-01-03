@@ -1,5 +1,6 @@
 require('dotenv').config();
 var axios = require('axios');
+var aws4  = require('aws4')
 
 // Configure our authentication axios call
 var data = JSON.stringify({
@@ -19,6 +20,7 @@ var authConfig = {
 var access_key_id;
 var secret_key;
 var session_token;
+var region;
 // Date at the time function is called
 var dateNow = Date.now();
 // Date 8 hour before function is called
@@ -36,6 +38,14 @@ let callPromise = new Promise(function () {
         access_key_id = response.data.access_key_id;
         secret_key = response.data.secret_key;
         session_token = response.data.session_token;
+        region = response.data.region;
+
+        console.log(aws4.sign({
+            secretAccessKey: secret_key,
+            accessKeyId: access_key_id,
+            sessionToken: session_token
+        }))
+
     })
     .catch(function (error) {
         console.log(error);
@@ -43,13 +53,13 @@ let callPromise = new Promise(function () {
 })
 
 // Configure our call to get new products from Orderhive
-var getProductConfig = {
-    method: 'post',
-    url: 'https://api.orderhive.com/product/listing/flat?page=1&size=10',
-    headers: {
-        'id_token': `${access_key_id}`,
-        'X-Amz-Security-Token': `${session_token}`,
-        'X-Amz-Date': `${amzDate}`,
+//var getProductConfig = {
+//    method: 'post',
+//    url: 'https://api.orderhive.com/product/listing/flat?page=1&size=10',
+//    headers: {
+//        'id_token': `${access_key_id}`,
+//        'X-Amz-Security-Token': `${session_token}`,
+//        'X-Amz-Date': `${amzDate}`,
         //'Authorization': 
-    }
-};
+//    }
+//};
