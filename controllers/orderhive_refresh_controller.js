@@ -34,12 +34,17 @@ router.get('/', async (req, res) => {
             session_token = response.data.session_token;
             region = response.data.region;
             res.send(JSON.stringify(response.data))
-            res.send(response.status)
+            res.send(JSON.stringify(response.status))
         })
         .catch(function (error) {
-            //console.log(error);
-            //console.log(JSON.stringify(error.response.data));
-            res.send(JSON.stringify(error.response.status))
+            var stat;
+            if (error.response) {
+                stat = error.response.status
+            }
+            if (stat === 429) {
+                res.send(false)
+                //console.log(error.response.status)
+            }
         });
     })
 })
