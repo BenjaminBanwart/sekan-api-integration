@@ -23,9 +23,9 @@ app.get('/', (req, res) => {
 const orderhive_refresh_controller = require('./controllers/orderhive_refresh_controller');
 app.use('/orderhive_refresh', orderhive_refresh_controller);
 
-//Controller to use aws signer for authentication
-const orderhive_aws_controller = require('./controllers/orderhive_aws_controller');
-app.use('/orderhive_aws', orderhive_aws_controller);
+//Controller to use aws signer for authentication and send request for products list
+const orderhive_get_products_controller = require('./controllers/orderhive_get_products_controller');
+app.use('/orderhive_get_products', orderhive_get_products_controller);
 
 //Define server port
 app.listen(process.env.PORT, () => {
