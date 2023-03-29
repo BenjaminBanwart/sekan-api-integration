@@ -1,12 +1,12 @@
 const router = require('express').Router();
 require('dotenv').config();
 var axios = require('axios');
-var aws4  = require('aws4')
+var aws4  = require('aws4');
 
-var access_key_id
-var secret_key
-var session_token
-var region
+var access_key_id;
+var secret_key;
+var session_token;
+var region;
 
 
 router.post('/', async (req, res) => {
