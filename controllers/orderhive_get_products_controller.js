@@ -29,9 +29,10 @@ router.post('/', async (req, res) => {
         dateStr = dateStr.split(".")[0] + "Z";
         return dateStr;
     }
+    var opts = { service:'execute-api', region:region, host:'api.orderhive.com' }
 
-    var signedString = aws4.sign(access_key_id, secret_key, region, 'execute-api', session_token=session_token
-    ).headers.Authorization
+    var signedString = aws4.sign(opts, {accessKeyId:access_key_id, secretAccessKey:secret_key
+}).headers.Authorization
 
 
     // Date for orderhive query
@@ -41,10 +42,8 @@ router.post('/', async (req, res) => {
 
     //Configure our call to get new products from Orderhive
     var getProductConfig = {
-    host: 'https://api.orderhive.com',
     method: 'POST',
     url: 'https://api.orderhive.com/product/listing/flat?page=1',
-    path: "/product/listing/flat",
     headers: {
         'id_token': `${access_key_id}`,
         'Content-Type': 'application/json',
